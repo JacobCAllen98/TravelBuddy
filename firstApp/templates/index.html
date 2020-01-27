@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div {
+        display: inline-block;
+        width: 400px;
+        vertical-align: top;
+    }   
+    </style>
+</head>
+<body>
+    <h1>Register</h1>
+    {% if messages %}
+        <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div>
+    <form action="/addUser" method="post">
+        {% csrf_token %}
+        <p>Name: <input type="text" name="name" id=""></p>
+        <p>Username: <input type="text" name="username" id=""></p>
+        <p>Password: <input type="password" name="pw" id=""></p>
+        <p>Confirm PW: <input type="password" name="cpw" id=""></p>
+        <button type="submit">Register</button>
+    </form>
+    </div>
+    <div>
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        {% csrf_token %}
+        <p>Username: <input type="text" name="username" id=""></p>
+        <p>Password: <input type="password" name="pw" id=""></p>
+        <button type="submit">Log In</button>
+    </form>
+    </div>
+</body>
+</html>

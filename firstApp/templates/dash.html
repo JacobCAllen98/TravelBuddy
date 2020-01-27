@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello, {{ user.name }}!</h1>
+    <a href="/logout">Log out</a>
+    <p>Your Trip Schedules</p>
+    <table>
+        <tr>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Plan</th>
+        </tr>
+        {% for trips in currTrip %}
+        <tr>
+            <td><a href="viewTrip/{{ trips.id }}">{{ trips.dest }}</a></td>
+            <td>{{ trips.startDate }}</td>
+            <td>{{ trips.endDate }}</td>
+            <td>{{ trips.desc }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <p>Other User's Travel Plans</p>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Do You Want to Join?</th>
+        </tr>
+        {% for trips in possTrip %}
+        <tr>
+            <td>{{ trips.created_by }}</td>
+            <td><a href="/viewTrip/{{ trips.id }}">{{ trips.dest }}</a></td>
+            <td>{{ trips.startDate }}</td>
+            <td>{{ trips.endDate }}</td>
+            <td><a href="/joinTrip/{{trips.id}}">Join</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/makePlan">Add Travel Plan</a>
+</body>
+</html>
